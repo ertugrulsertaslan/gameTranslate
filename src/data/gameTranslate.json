@@ -1,0 +1,110 @@
+[
+  {
+    "id": 0,
+    "name": "Ostia",
+    "year": 2025,
+    "imageSource": "/src/assets/ostia.webp",
+    "description": "1-4 players create trade routes in the Mediterranean using a mancala/resource system",
+    "age_limit": "10+",
+    "players": "1-3 players",
+    "duration": "50",
+    "durationLabel": "40m - 50m",
+    "category": "War"
+  },
+  {
+    "id": 1,
+    "name": "Arydia",
+    "year": 2020,
+    "imageSource": "/src/assets/arydia.webp",
+    "description": "Dare to tread the paths of Arydia, exploring its open world in a campaign setting",
+    "age_limit": "12+",
+    "players": "2-4 players",
+    "duration": "45",
+    "durationLabel": "30m - 45m",
+    "category": "Natural"
+  },
+  {
+    "id": 2,
+    "name": "FellowShip",
+    "year": 2024,
+    "imageSource": "/src/assets/fellowship.webp",
+    "description": "As members of The Fellowship, embark on a journey to save—or doom—Middle-earth",
+    "age_limit": "16+",
+    "players": "1-2 players",
+    "duration": "90",
+    "durationLabel": "60m - 90m",
+    "category": "Adventure"
+  },
+  {
+    "id": 3,
+    "name": "Set",
+    "year": 2015,
+    "imageSource": "/src/assets/set.webp",
+    "description": "Search for signs of alien life by launching probes and analyzing distant signals",
+    "age_limit": "18+",
+    "players": "3-5 players",
+    "duration": "60",
+    "durationLabel": "45m - 60m",
+    "category": "War"
+  },
+  {
+    "id": 4,
+    "name": "Forest",
+    "year": 2018,
+    "imageSource": "/src/assets/forest.webp",
+    "description": "Enjoy new caves, a solo with the Automa and a selection of promo cards",
+    "age_limit": "7+",
+    "players": "1-4 players",
+    "duration": "30m",
+    "durationLabel": "20m - 30m",
+    "category": "Adventure"
+  },
+  {
+    "id": 5,
+    "name": "Arcs",
+    "year": 2021,
+    "imageSource": "/src/assets/arcs.webp",
+    "description": "Guide your faction through a space opera",
+    "age_limit": "13+",
+    "players": "2-6 players",
+    "duration": "70",
+    "durationLabel": "50m - 70m",
+    "category": "Natural"
+  },
+  {
+    "id": 6,
+    "name": "Harmonies",
+    "year": 2022,
+    "imageSource": "/src/assets/harmonies.webp",
+    "description": "Create your own landscape and habitats to welcome animals",
+    "age_limit": "10+",
+    "players": "1-2 players",
+    "duration": "25",
+    "durationLabel": "15m - 25m",
+    "category": "War"
+  },
+  {
+    "id": 7,
+    "name": "Ark Nova",
+    "year": 2021,
+    "imageSource": "/src/assets/ark.webp",
+    "description": "Plan and build a modern, scientifically managed zoo to support conservation projects",
+    "age_limit": "12+",
+    "players": "4-8 players",
+    "duration": "120",
+    "durationLabel": "90m - 120m",
+    "category": "Adventure"
+  },
+  {
+    "id": 8,
+    "name": "Merchants of Andromeda",
+    "year": 2025,
+    "imageSource": "/src/assets/forest.webp",
+    "description": "Compete in intergalactic mini-games and Dutch auctions. Most money wins",
+    "age_limit": "14+",
+    "players": "3-6 players",
+    "duration": "60",
+    "durationLabel": "40m - 60m",
+    "category": "Natural"
+  }
+]
