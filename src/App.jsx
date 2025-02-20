@@ -9,6 +9,23 @@ function App() {
   const [selectedGameAge, setSelectedGameAge] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedPDF, setSelectedPDF] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
+
+  const openPDF = (game) => {
+    const pdfPath = game[selectedLanguage];
+    if (pdfPath) {
+      setSelectedPDF(pdfPath);
+      setIsModalOpen(true);
+    }
+  };
+
+  const closeModal = () => {
+    setSelectedPDF(null);
+    setIsModalOpen(false);
+  };
+
   const [players, setPlayers] = useState([
     { value: "1-3", label: "1-3" },
     { value: "4-5", label: "4-5" },
@@ -82,15 +99,16 @@ function App() {
     }
     return 0;
   });
-  const categories = [...new Set(gameData.map((game) => game.category))];
+  console.log(selectedPDF);
+  const categories = [...new Set(gameData.flatMap((game) => game.category))];
   return (
-    <div className="flex  h-screen w-full px-10">
-      <div className="flex flex-col w-full ">
-        <div className="w-full flex gap-12 h-1/5 mx-5 px-10 border border-gray-200 rounded-sm items-center justify-between bg-gray-100">
-          <h1 className="text-xl w-40">Game Translate</h1>
-          <div className="w-[90%] relative">
+    <div className="flex h-screen w-full xl:px-10">
+      <div className="flex flex-col w-full">
+        <div className="w-full flex gap-2 md:gap-8 xl:gap-12 h-1/5 py-5 xl:mx-5 px-5 md:px-10 border border-gray-200 rounded-sm items-center md:justify-between bg-gray-100">
+          <h1 className="text-sm md:text-xl md:w-40">Game Translate</h1>
+          <div className="w-full md:w-[90%] relative">
             <input
-              className="h-12 w-full border-1 rounded-xl p-5 pl-16 border-gray-500"
+              className="h-12 w-full border-1 rounded-xl p-5 md:pl-16 border-gray-500"
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             <Icon
@@ -100,10 +118,10 @@ function App() {
             />
           </div>
         </div>
-        <div className="w-full h-screen flex px-5 py-5">
-          <div className="overflow-y-auto w-1/4 h-[740px] space-y-6 p-5 px-10 border border-gray-300 bg-gray-100 rounded-md">
+        <div className="w-full h-screen flex flex-col md:flex-row px-5 py-5">
+          <div className="overflow-y-auto w-full md:w-1/2 xl:1/2 2xl:w-1/4 h-[760px] space-y-6 p-5 px-10 border-2 border-gray-300 bg-gray-100 rounded-md">
             {/* Category Filter */}
-            <div className="space-y-2 my-5">
+            <div className="space-y-2 my-5 w-full">
               <p className="font-bold">Category</p>
               {selectedCategory && (
                 <p
@@ -113,7 +131,7 @@ function App() {
                   Clear Selection
                 </p>
               )}
-              <div className="flex flex-col">
+              <div className="flex flex-col h-40 overflow-y-auto">
                 {categories.map((category, index) => (
                   <div key={index} className="mb-1">
                     <input
@@ -221,8 +239,17 @@ function App() {
               </div>
             </div>
           </div>
-          <div className="flex gap-6 py-5 flex-wrap overflow-y-auto w-full h-[740px] px-10">
+
+          <div className="flex gap-6 py-5 flex-wrap overflow-y-auto w-full h-[760px] px-0 md:px-5 lg:px-0 xl:px-10 mt-10 md:mt-0">
             <div className="w-full justify-end text-right h-10">
+              <select
+                value={selectedLanguage}
+                onChange={(e) => setSelectedLanguage(e.target.value)}
+                className="px-2 py-1 rounded-md border border-gray-400"
+              >
+                <option value="en">English</option>
+                <option value="tr">Turkish</option>
+              </select>
               <select
                 className="px-2 py-1 ml-1 rounded-md border border-gray-400"
                 value={selectedSortOption}
@@ -235,12 +262,13 @@ function App() {
                 <option value="futureToCurrent">From Future to Present</option>
               </select>
             </div>
-            <div className="flex gap-6 py-5 flex-wrap w-full">
+            <div className="flex gap-6 py-5 flex-wrap w-full justify-center">
               {sortedGames.length > 0 &&
                 sortedGames.map((game) => (
                   <div
+                    onClick={() => openPDF(game.pdfPath)}
                     key={game.id}
-                    className="w-[32%] h-112 border border-gray-300 rounded-md text-center"
+                    className="w-full lg:w-10/12 xl:w-[48%] 2xl:w-[31%] h-auto border border-gray-300 rounded-md text-center"
                   >
                     <img
                       className="w-full mb-3 rounded-tr-md rounded-tl-md"
@@ -250,7 +278,7 @@ function App() {
                     <div className="flex-col justify-between w-full px-5">
                       <h1 className="text-xl w-full mb-5">{game.name}</h1>
                       <p className="mb-5">{game.description}</p>
-                      <div className="flex w-full gap-6 justify-center mb-5">
+                      <div className="flex w-full gap-6 justify-center flex-wrap mb-5">
                         <div>
                           <p>Age</p>
                           <p className="text-sm">{game.age_limit}</p>
@@ -269,12 +297,30 @@ function App() {
                         </div>
                         <div>
                           <p>Category</p>
-                          <p className="text-sm">{game.category}</p>
+                          <p className="text-sm">{game.category[0]}</p>
                         </div>
                       </div>
                     </div>
                   </div>
                 ))}
+              {isModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[99999]">
+                  <div className="bg-white p-5 rounded-lg shadow-lg w-[90%] md:w-[60%] h-[90%] md:h-[80%] overflow-auto flex flex-col relative">
+                    <button
+                      onClick={closeModal}
+                      className="absolute top-2 right-2 bg-red-500 text-white px-4 py-2 rounded-md"
+                    >
+                      Kapat
+                    </button>
+                    <embed
+                      src={selectedPDF}
+                      type="application/pdf"
+                      width="100%"
+                      height="1000px"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
